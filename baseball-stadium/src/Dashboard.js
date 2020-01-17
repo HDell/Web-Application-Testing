@@ -1,8 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import Display from "./Display";
 
 const Dashboard = () => {
     const [strikes, setStrikes] = useState(0);
     const [balls, setBalls] = useState(0);
+
+    useEffect(() => {
+
+    }, [strikes, balls]);
 
     const resets = () => {
         setStrikes(0);
@@ -10,25 +15,25 @@ const Dashboard = () => {
     };
 
     const handleFoul = () => {
-        if (strikes === 0) {
-            setStrikes(1);
-        } else if (strikes === 1) {
-            setStrikes(2);
+        if (strikes < 2) {
+            setStrikes(strikes + 1);
         }
     };
 
     const handleStrike = () => {
         if (strikes < 2) {
             setStrikes(strikes + 1);
+        } else {
+            resets();
         }
-        resets();
     };
 
     const handleBall = () => {
         if (balls < 3) {
             setBalls(balls + 1);
+        } else {
+            resets();
         }
-        resets();
     };
 
     const handleHit = () => {
@@ -37,10 +42,11 @@ const Dashboard = () => {
 
     return(
         <div>
-            <button onClick={handleStrike}>Strike</button>
-            <button onClick={handleBall}>Ball</button>
-            <button onClick={handleFoul}>Foul</button>
-            <button onClick={handleHit}>Hit</button>
+            <Display strikeDisplay={strikes} ballDisplay={balls}/>
+            <button data-testid="strike-button" onClick={handleStrike}>Strike</button>
+            <button data-testid="ball-button" onClick={handleBall}>Ball</button>
+            <button data-testid="foul-button" onClick={handleFoul}>Foul</button>
+            <button data-testid="hit-button" onClick={handleHit}>Hit</button>
         </div>
     );
 };

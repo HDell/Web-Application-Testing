@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
-import Dashboard from './Dashboard';
 
-const Display = () => {
+const Display = (props) => {
 
     return(
         <div>
             <h1>Baseball At Bat Information</h1>
-            <h3>Strikes: {Dashboard.state.strikes} </h3>
-            <h3>Balls: {Dashboard.state.balls}</h3>
+            <h3 data-testid="strike-count">Strikes: {props.strikeDisplay} </h3>
+            <h3 data-testid="ball-count">Balls: {props.ballDisplay} </h3>
         </div>
     );
 
