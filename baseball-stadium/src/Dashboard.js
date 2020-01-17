@@ -1,52 +1,48 @@
 import React, {useState} from 'react';
 
-class Dashboard extends React.Component {
-    state = {
-        strikes: 0,
-        balls: 0
+const Dashboard = () => {
+    const [strikes, setStrikes] = useState(0);
+    const [balls, setBalls] = useState(0);
+
+    const resets = () => {
+        setStrikes(0);
+        setBalls(0);
     };
 
-    resets = () => {
-        this.setState({strikes: 0});
-        this.setState({balls: 0});
-    };
-
-    handleFoul = () => {
-        if (this.strikes === 0) {
-            this.setState({strikes: 1});
-        } else if (this.strikes === 1) {
-            this.setState({strikes: 2});
+    const handleFoul = () => {
+        if (strikes === 0) {
+            setStrikes(1);
+        } else if (strikes === 1) {
+            setStrikes(2);
         }
     };
 
-    handleStrike = () => {
-        if (this.strikes < 2) {
-            this.setState({strikes: this.strikes + 1});
+    const handleStrike = () => {
+        if (strikes < 2) {
+            setStrikes(strikes + 1);
         }
-        this.resets();
+        resets();
     };
 
-    handleBall = () => {
-        if (this.balls < 3) {
-            this.setState({balls: this.balls + 1});
+    const handleBall = () => {
+        if (balls < 3) {
+            setBalls(balls + 1);
         }
-        this.resets();
+        resets();
     };
 
-    handleHit = () => {
-        this.resets();
+    const handleHit = () => {
+        resets();
     };
 
-    render() {
-        return (
-            <div>
-                <button onClick={this.handleStrike()}>Strike</button>
-                <button onClick={this.handleBall()}>Ball</button>
-                <button onClick={this.handleFoul()}>Foul</button>
-                <button onClick={this.handleHit()}>Hit</button>
-            </div>
-        );
-    }
+    return(
+        <div>
+            <button onClick={handleStrike}>Strike</button>
+            <button onClick={handleBall}>Ball</button>
+            <button onClick={handleFoul}>Foul</button>
+            <button onClick={handleHit}>Hit</button>
+        </div>
+    );
 };
 
 export default Dashboard;
